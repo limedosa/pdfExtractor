@@ -1,0 +1,7 @@
+pip install pdfkit
+pip install pdfkit selenium
+pip install selenium chromedriver-autoinstaller
+pip install pdf2image
+pip install pdfplumber
+pip install pdfkit pdfplumber
+playwright install
