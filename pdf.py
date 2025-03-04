@@ -6,10 +6,10 @@ import os
 # List of URLs
 urls = [
     'https://www.sec.gov/Archives/edgar/data/96223/000114036123040200/brhc20057666_424b2.htm'
-    # "https://www.sec.gov/Archives/edgar/data/96223/000114036125006724/ef20044631_fwp.htm",
-    # "https://www.sec.gov/Archives/edgar/data/96223/000114036125006462/ef20044714_424b2.htm",
-    # "https://www.sec.gov/Archives/edgar/data/96223/000114036125004817/ny20036825x3_ars.pdf",
-    # "https://www.sec.gov/Archives/edgar/data/96223/000108514625001584/xslForm13F_X02/primary_doc.xml"
+    "https://www.sec.gov/Archives/edgar/data/96223/000114036125006724/ef20044631_fwp.htm",
+    "https://www.sec.gov/Archives/edgar/data/96223/000114036125006462/ef20044714_424b2.htm",
+    "https://www.sec.gov/Archives/edgar/data/96223/000114036125004817/ny20036825x3_ars.pdf",
+    "https://www.sec.gov/Archives/edgar/data/96223/000108514625001584/xslForm13F_X02/primary_doc.xml"
 ]
 
 # CSV file name
