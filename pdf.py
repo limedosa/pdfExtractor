@@ -8,10 +8,11 @@ from io import BytesIO  # Import BytesIO for handling bytes content
 
 # List of URLs
 urls = [
-    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/7103b0ff-91b7-4e73-8f38-2a633fee9574.pdf",
-    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/ffa83516-7b50-46f7-b4fe-98132eaf09c7.pdf",
-    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/128143fd-0fd9-4c8f-aab5-fe58845d0b9c.pdf",
-    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/f8f54136-2c65-49ca-bc0a-2c93019cb2d2.pdf"
+    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/31fa64d7-9b1c-434d-92c2-d3f4b0bc2837.pdf",
+    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/10b8964c-7d3d-4529-97a3-8f81f9abd12c.pdf",
+    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/5fbc4f92-223a-4259-bd7b-cbf4e8570fdb.pdf",
+    "https://d18rn0p25nwr6d.cloudfront.net/CIK-0000096223/99dcdd85-a311-4e02-a541-e3fdaf2cc978.pdf"
+
 ]
 
 # CSV file name
