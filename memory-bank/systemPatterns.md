@@ -1,122 +1,96 @@
-# System Patterns: URL Text Extraction Tool
+# System Patterns
 
-## Architecture Overview
+## PDF Processing Pipeline Architecture
 
-### Component Architecture
-```mermaid
-graph TD
-    A[URL Input Handler] --> B[URL Validator]
-    B --> C[Content Fetcher]
-    C --> D[Text Extractor]
-    D --> E[Output Formatter]
-    
-    %% Error handling flows
-    B -- Invalid URL --> F[Error Handler]
-    C -- Network Error --> F
-    D -- Extraction Error --> F
-```
+### Core Components
 
-## Core Components
+1. **AWS Bedrock Integration**
+   - Uses Claude 3 Sonnet model for text analysis
+   - Implements robust error handling and retry logic
+   - Includes rate limiting mechanisms
 
-### 1. URL Input Handler
-- Responsibility: Accept and preprocess URLs
-- Pattern: Factory Pattern for different input sources
-- Key Functions:
-  - URL normalization
-  - Input queue management
-  - Batch processing support
+2. **Text Extraction Layer**
+   - Primary Methods:
+     - pdfplumber: Basic text extraction
+     - Docling: Advanced preprocessing with OCR capabilities
+   - Switchable extraction strategies
 
-### 2. URL Validator
-- Responsibility: Validate URL format and accessibility
-- Pattern: Chain of Responsibility
-- Validation Steps:
-  1. Format validation
-  2. Protocol verification
-  3. Domain resolution
-  4. Robot.txt compliance
+3. **Rate Limiting System**
+   - Adaptive backoff mechanism
+   - Per-minute rate limiting
+   - Dynamic delay calculation based on consecutive failures
+   - Configurable limits:
+     ```python
+     MAX_CALLS_PER_MINUTE = 10
+     MIN_BACKOFF_TIME = 5
+     MAX_RETRIES = 15
+     ```
 
-### 3. Content Fetcher
-- Responsibility: Retrieve web content
-- Pattern: Adapter Pattern for different protocols
-- Features:
-  - Rate limiting
-  - Retry mechanism
-  - Connection pooling
-  - Header management
+4. **Metrics System**
+   - Weighted token similarity calculation
+   - Text normalization
+   - Ground truth comparison
+   - Performance tracking
 
-### 4. Text Extractor
-- Responsibility: Extract and clean text content
-- Pattern: Strategy Pattern for different site types
-- Processing Pipeline:
-  1. HTML parsing
-  2. Content identification
-  3. Text extraction
-  4. Content cleaning
+### Data Flow Patterns
 
-### 5. Output Formatter
-- Responsibility: Format and save extracted text
-- Pattern: Template Method Pattern
-- Output Options:
-  - Plain text
-  - JSON structure
-  - Streaming output
+1. **Document Processing Pipeline**
+   ```
+   PDF Input -> Text Extraction -> Preprocessing -> AI Processing -> JSON Output
+   ```
 
-### 6. Error Handler
-- Responsibility: Manage error states and recovery
-- Pattern: Observer Pattern
-- Error Categories:
-  - Input validation errors
-  - Network errors
-  - Parsing errors
-  - System errors
+2. **Batch Processing Pattern**
+   - Processes documents in configurable batch sizes
+   - Implements delays between batches
+   - Maintains progress tracking
 
-## Data Flow Patterns
+3. **Error Handling Pattern**
+   ```
+   Try Operation -> Check for Throttling -> 
+   Exponential Backoff -> Retry -> Max Retries Check
+   ```
 
-### Main Processing Flow
-1. Input Acceptance
-2. Validation
-3. Content Retrieval
-4. Text Extraction
-5. Output Generation
+### Configuration Management
 
-### Error Flow
-1. Error Detection
-2. Classification
-3. Logging
-4. Recovery (where possible)
-5. User Notification
+1. **Resource Limits**
+   ```python
+   MAX_TOKENS = 10000
+   MAX_OUTPUT_TOKENS = 2000
+   MAX_CONTEXT_WORDS = 150000
+   MAX_OUTPUT_WORDS = 6200
+   ```
 
-## Design Principles
+2. **Processing Options**
+   - OCR enablement options
+   - Multiple prompt strategies
+   - Configurable batch sizes
 
-### 1. Separation of Concerns
-- Each component has a single responsibility
-- Clear interfaces between components
-- Modular design for easy testing
+### Integration Patterns
 
-### 2. Error Handling
-- Fail fast and explicitly
-- Comprehensive error reporting
-- Graceful degradation
+1. **Google Drive Integration**
+   - Mounted storage access
+   - Persistent file management
 
-### 3. Extensibility
-- Plugin architecture for extractors
-- Configurable processing pipeline
-- Custom output formatters
+2. **AWS Bedrock Integration**
+   - Authentication handling
+   - Service client management
+   - Model-specific configurations
 
-## Testing Patterns
-1. Unit Tests per Component
-2. Integration Tests for Flows
-3. Mock HTTP Responses
-4. Error Case Validation
+### Testing & Validation
 
-## Configuration Patterns
-- External configuration file
-- Environment variables
-- Command line arguments
-- Runtime configuration
+1. **Similarity Metrics**
+   - Token-based comparison
+   - Weighted numerical token handling
+   - Normalized text comparison
 
-## Monitoring Patterns
-- Performance metrics
-- Error rates
-- Success/failure logging
-- Resource usage tracking
+### Performance Optimization
+
+1. **Rate Limiting Strategy**
+   - Adaptive delays
+   - Consecutive failure tracking
+   - Dynamic backoff calculation
+
+2. **Batch Processing Optimization**
+   - Configurable batch sizes
+   - Inter-batch delays
+   - Progress tracking

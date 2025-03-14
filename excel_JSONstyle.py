@@ -5,10 +5,10 @@ import os
 
 # Define paths
 folder_path = r"C:\Users\ldomi\OneDrive - WideNet AI\Documents\GitHub\pdfCreator"
-csv_file = os.path.join(folder_path, "groundTruthJson.csv")
+csv_file = os.path.join(folder_path, "groundTruthJson50Docs.csv")
 
 # List of files to process
-file_names = [f"jefferies{i}.xls" for i in range(1, 16)]
+file_names = [f"jefferies{i}.xls" for i in range(1, 51)]
 
 # Unwanted text to remove
 UNWANTED_TEXT = "Created by EDGAR Online, Inc."

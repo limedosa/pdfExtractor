@@ -1,102 +1,46 @@
-# Active Context: URL Text Extraction Tool
+# Active Context
 
-## Current Status
-Initial implementation of core components complete:
-- URL validator implemented with comprehensive error handling
-- Content fetcher with timeout and error management
-- Text extractor with trafilatura and BeautifulSoup fallback
-- Unit test framework established with mock-based testing
+## Recent Changes - Code Optimization
 
-## Recent Decisions
-1. Component Implementation:
-   - Used trafilatura as primary extractor for better content detection
-   - Implemented BeautifulSoup as fallback mechanism
-   - Created custom exception class for unified error handling
-   - Employed session management in ContentFetcher for efficiency
+### Refactored jefferiesdocspreprocessing.py
+- Extracted repeated code into reusable functions
+- Maintained identical functionality
+- Improved code organization and maintainability
 
-2. Testing Strategy:
-   - Comprehensive mock-based testing
-   - Full coverage of error cases
-   - Integration testing of complete workflow
+### Key Functions Created
+1. `setup_connections()`
+   - Centralizes Google Drive and AWS connection setup
+   - Returns configured service clients
 
-## Current Focus
-1. Testing and Validation:
-   - Running unit tests
-   - Gathering real-world test cases
-   - Validating error handling
+2. `setup_file_handlers()`
+   - Handles JSON and CSV file initialization
+   - Consistent file handling across processing methods
 
-2. Documentation Enhancement:
-   - Code comments and docstrings
-   - Usage examples
-   - Installation instructions
+3. `process_pdf_with_pdfplumber()` and `process_pdf_with_docling()`
+   - Separated PDF processing methods into distinct functions
+   - Allows easy switching between processing strategies
 
-3. Recent Improvements (pdf.py):
-   - Implemented retry mechanism for failed requests
-   - Added comprehensive error handling and logging
-   - Enhanced URL validation
-   - Implemented safe PDF handling using tempfile
-   - Improved text cleaning with regex patterns
-   - Updated requirements.txt with new dependencies
+4. `process_batch()`
+   - Consolidated batch processing logic
+   - Handles file existence checks, processing, and result saving
 
-## Active Considerations
-1. Performance Optimization
-   - Session management for multiple requests
-   - Memory usage in text extraction
-   - Response time optimization
+5. `main()`
+   - Organizes high-level program flow
+   - Supports multiple processing methods
 
-2. Error Handling
-   - Network timeout handling
-   - Invalid HTML handling
-   - Resource cleanup
+### Utility Functions
+- `normalize_text()`: Text normalization
+- `is_number()`: Number token detection
+- `weighted_token_similarity()`: Similarity calculation
+- `count_words()`: Word counting
 
-3. Content Quality
-   - Content relevance scoring
-   - Noise filtering improvements
-   - Format preservation options
+### Current State
+- All original functionality preserved
+- Code is more modular and maintainable
+- Processing methods can be easily extended or modified
 
-## Next Steps
-1. Immediate Tasks
-   - Run comprehensive test suite
-   - Document usage examples
-   - Create virtual environment setup guide
-
-2. Short-term Goals
-   - Implement batch processing
-   - Add configuration system
-   - Enhance CLI interface
-   - Add logging improvements
-
-3. Mid-term Goals
-   - Performance optimization
-   - Proxy support
-   - Rate limiting
-   - Caching system
-
-## Technical Debt Tracking
-1. Current Items
-   - Configuration system needed
-   - Logging enhancements required
-   - CLI argument parsing improvements
-   - Documentation gaps
-
-2. Future Considerations
-   - JavaScript rendering support
-   - Custom extraction rules
-   - Content classification
-   - Performance monitoring
-
-## Questions to Address
-1. Implementation
-   - Optimal batch processing size
-   - Cache invalidation strategy
-   - Rate limiting implementation
-
-2. Testing
-   - Real-world test cases needed
-   - Performance benchmarks
-   - Edge case coverage
-
-## Notes
-- Core functionality is stable and well-tested
-- Focus on documentation and usability next
-- Consider gathering user feedback for feature prioritization
+### Next Steps
+1. Consider adding more processing methods
+2. Implement configuration file for constants
+3. Add more detailed logging
+4. Consider parallelization for batch processing
